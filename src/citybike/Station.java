@@ -14,7 +14,7 @@ public class Station {
         this.location = location;
         this.bikes = new ArrayList<>();
     }
-    public Station(){}
+    public Station(){}                                      //for the checkWhichStation()
 
     public Integer getStationID(){
         return this.stationID;
@@ -29,9 +29,9 @@ public class Station {
         return this.bikes;
     }
     public void returnBike(Integer bikeID){
-        if(this.bikes.size() < 5) {
+        if(this.bikes.size() < 5) {                         //limits the amount of bikes in the station
             addBike(bikeID);
-            Main.checkWhichUser(bikeID);
+            Main.checkWhichUser(bikeID);                    //goes to the correct user to remove the bike
 
         }else{
             System.out.println("Sorry this station is already full");

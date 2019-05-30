@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Main {
 
+    //HashMaps are outside of main, because that way they are accessible in the methods
     static HashMap<Integer, Station> stations = new HashMap<>();
     static HashMap<Integer, User> users = new HashMap<>();
     static HashMap<Integer, Bike> bikes = new HashMap<>();
@@ -30,7 +31,7 @@ public class Main {
         bikes.put(b7.getBikeID(),b7);
         bikes.put(b8.getBikeID(),b8);
 
-        // Locations and Hashmap of Stations are created
+        // Locations of Stations are created and added to HashMap
         Station st1 = new Station("Schönbrunn");
         Station st2 = new Station("Oper");
         Station st3 = new Station("Secession");
@@ -49,7 +50,7 @@ public class Main {
         st2.addBike(7);
         st3.addBike(4);
 
-        // Creation of users and HashMap
+        // Creation of users and adding to HashMap
         User u1 = new User("Brad", "Pitt");
         User u2 = new User("Kevin", "Spacey");
         User u3 = new User("Demi", "Moore");
@@ -60,11 +61,12 @@ public class Main {
         users.put(u3.getUserID(), u3);
         users.put(u4.getUserID(), u4);
 
+        //Testing data
         System.out.println("User " + u1.getCurrentlyRentedBike());
-        System.out.println("Station: " + st2.getBikes().toString());
+        System.out.println("Station: " + st1.getBikes().toString());
         u1.rentABike(1);
         System.out.println("User " + u1.getCurrentlyRentedBike());
-        System.out.println("Station: " + st2.getBikes().toString());
+        System.out.println("Station: " + st1.getBikes().toString());
 
         st3.returnBike(1);
         System.out.println("User " + u1.getCurrentlyRentedBike());
@@ -78,9 +80,9 @@ public class Main {
     }
     public static void checkWhichStation(Integer bikeID){
         Station station = new Station();
-        for(Map.Entry<Integer, Station> entry : stations.entrySet()){
-            if(entry.getValue().getBikes().contains(bikeID)){
-                station = entry.getValue();
+        for(Map.Entry<Integer, Station> entry : stations.entrySet()){   //go through stations-HashMap
+            if(entry.getValue().getBikes().contains(bikeID)){           //looks for bikeID
+                station = entry.getValue();                             //in which station bike was found
                 break;
             }
         }
@@ -88,8 +90,8 @@ public class Main {
     }
     public static void checkWhichUser(Integer bikeID){
         User user = new User();
-        for(Map.Entry<Integer, User> entry : users.entrySet()){
-            if(entry.getValue().getCurrentlyRentedBike() == bikeID){
+        for(Map.Entry<Integer, User> entry : users.entrySet()){         //go through users-HashMap
+            if(entry.getValue().getCurrentlyRentedBike() == bikeID){    //gives back the user, with the sought-after bikeID
                 user = entry.getValue();
                 break;
             }

@@ -20,16 +20,16 @@ public class User {
         this.name = name;
         this.surname = surname;
     }
-    public User(){}
+    public User(){}                                                                 //for checkWhichUser()
 
     public void rentABike(Integer bikeID){
-        if(Main.bikes.get(bikeID).getaState() == Bike.State.CAN_BE_RENTED) {
-            Main.checkWhichStation(bikeID);
+        if(Main.bikes.get(bikeID).getaState() == Bike.State.CAN_BE_RENTED) {        //check if the bike can be rented
+            Main.checkWhichStation(bikeID);                                         //removes the bike in the correct station
             this.currentlyRentedBike = bikeID;
             GregorianCalendar today = (GregorianCalendar) Calendar.getInstance();
-            this.rent = new Rent(bikeID, today);
-            this.rents.add(this.rent);
-        }else{
+            this.rent = new Rent(bikeID, today);                                    //creates Rent-Object for tracking
+            this.rents.add(this.rent);                                              //adds actual Rent-Object to an
+        }else{                                                                      //ArrayList, every time the rentABike() is called
             System.out.println("This bike can't be rented at the moment!");
         }
     }
@@ -44,15 +44,16 @@ public class User {
         return this.userID;
     }
     public void removeBike(Integer bikeID){
-        this.rent.setRentEnd();
+        this.rent.setRentEnd();                                                     //adds the renting End in Rent-Object
         this.currentlyRentedBike = null;
     }
     public void printAllRentedBikesEver(){
         SimpleDateFormat sdf = new SimpleDateFormat("kk:mm:ss dd.MM.yyyy");
-        System.out.printf("%17S" + "%28S%n", "Start", "End");
-        System.out.println("-------------------------------------------------------------");
+        String printName = this.name + " " + this.surname;
+        System.out.printf("%S" + "%17s" + "%28s%n", printName, "Start", "End");
+        System.out.println("----------------------------------------------------------------------");
         for(Rent rent : rents) {
-            System.out.printf("Bike" + "%2S" + "%25S" + "%30S%n", rent.getBikeID(), sdf.format(rent.getRentStart().getTime()),
+            System.out.printf("Bike" + "%2S" + "%34S" + "%30S%n", rent.getBikeID(), sdf.format(rent.getRentStart().getTime()),
                     sdf.format(rent.getRentEnd().getTime()));
         }
     }

@@ -2,14 +2,14 @@ package citybike;
 
 public class Bike {
 
-    private Integer bikeID;
-    private String color;
     enum State {
         CAN_BE_RENTED,
         CAN_NOT_BE_RENTED,
         IN_SERVICE,
         DISCARDED
     }
+    private Integer bikeID;
+    private String color;
     State aState;
     private static Integer counter = 1;
 
